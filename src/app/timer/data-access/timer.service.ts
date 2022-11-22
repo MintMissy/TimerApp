@@ -16,6 +16,15 @@ export class TimerService {
     return this.timers$.asObservable();
   }
 
+  getTimer(id: string): Timer | null {
+    const timerList = this.timers$.value.filter((timer) => timer.id === id);
+    if (timerList.length === 0) {
+      return null;
+    }
+    
+    return timerList[0];
+  }
+
   loadTimers() {
     const timersJson = localStorage.getItem(this.LOCAL_STORAGE_KEY);
     if (timersJson === null) {
