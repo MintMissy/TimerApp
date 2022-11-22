@@ -31,6 +31,8 @@ export class TimerService {
       id: '',
       startDate: new Date(),
       endDate: new Date(Date.now() + duration * 1000),
+      stopDate: new Date(),
+      stopped: false,
     };
     this.addTimer(timer);
     return timer;
@@ -53,6 +55,8 @@ export class TimerService {
       id: json.id,
       startDate: new Date(json.startDate),
       endDate: new Date(json.endDate),
+      stopDate: new Date(json.stopDate),
+      stopped: json.stopped,
     };
   }
 }

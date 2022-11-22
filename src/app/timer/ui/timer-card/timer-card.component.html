@@ -1,1 +1,3 @@
-<p>timer-card works!</p>
+<button (click)="timerEditClick.emit(timer.id)">edit</button>
+<button (click)="timerToggleStopClick.emit(timer.id)">stop</button>
+<button (click)="timerDeleteClick.emit(timer.id)">delete</button>

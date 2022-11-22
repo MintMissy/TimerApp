@@ -1,11 +1,17 @@
-export interface Timer {
+interface BaseTimer {
   id: string;
-  startDate: Date;
-  endDate: Date;
+  stopped: boolean;
 }
 
-export interface TimerJson {
+export interface Timer extends BaseTimer {
+  startDate: Date;
+  endDate: Date;
+  stopDate: Date;
+}
+
+export interface TimerJson extends BaseTimer {
   id: string;
   startDate: string;
   endDate: string;
+  stopDate: string;
 }

@@ -19,9 +19,9 @@ export class TimerPageComponent implements OnInit {
     this._timerService.getTimers();
   }
 
-  onStopTimerButtonClick(id: string) {}
+  onToggleStopTimerButtonClick(id: string) {}
 
   onRemoveTimerButtonClick(id: string) {}
-  
+
   onEditTimerButtonClick(id: string) {}
 }

@@ -11,7 +11,7 @@ export class TimerListComponent implements OnInit {
   @Input() timers!: Timer[];
   @Output() timerDeleteClick = new EventEmitter<string>();
   @Output() timerEditClick = new EventEmitter<string>();
-  @Output() timerStopClick = new EventEmitter<string>();
+  @Output() timerToggleStopClick = new EventEmitter<string>();
 
   constructor() {}
 

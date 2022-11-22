@@ -3,5 +3,5 @@
   [timers]="(timers$ | async)!"
   (timerDeleteClick)="onRemoveTimerButtonClick($event)"
   (timerEditClick)="onEditTimerButtonClick($event)"
-  (timerStopClick)="onStopTimerButtonClick($event)"
+  (timerToggleStopClick)="onToggleStopTimerButtonClick($event)"
 ></app-timer-list>
