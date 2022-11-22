@@ -50,6 +50,27 @@ export class TimerService {
     localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.timers$.value));
   }
 
+  toggleTimerState(id: string) {
+    this.timers$.next(
+      [...this.timers$.value].map((timer) => {
+        if (timer.id !== id) {
+          return timer;
+        }
+
+        if (timer.stopped === false) {
+          timer.stopDate = new Date();
+          timer.stopped = true;
+        } else {
+          timer.stopped = true;
+          const remainingTime = timer.endDate.getTime() - timer.stopDate.getTime();
+          timer.endDate = new Date(Date.now() + remainingTime);
+        }
+
+        return timer;
+      })
+    );
+  }
+
   private parseTimerFromJson(json: TimerJson): Timer {
     return {
       id: json.id,
