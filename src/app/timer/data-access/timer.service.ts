@@ -2,6 +2,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Timer, TimerJson } from '../model/timer.model';
 
 import { Injectable } from '@angular/core';
+import { getRandomUid } from 'src/app/core/util/id.util';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class TimerService {
     if (timerList.length === 0) {
       return null;
     }
-    
+
     return timerList[0];
   }
 
@@ -37,9 +38,9 @@ export class TimerService {
 
   createTimer(duration: number): Timer {
     const timer: Timer = {
-      id: '',
+      id: getRandomUid(),
       startDate: new Date(),
-      endDate: new Date(Date.now() + duration * 1000),
+      endDate: new Date(Date.now() + duration),
       stopDate: new Date(),
       stopped: false,
     };
@@ -49,14 +50,32 @@ export class TimerService {
 
   removeTimer(id: string): void {
     this.timers$.next([...this.timers$.value].filter((timer) => timer.id !== id));
+    this.updateLocalStorage();
   }
 
   private addTimer(timer: Timer): void {
     this.timers$.next([...this.timers$.value, timer]);
+    this.updateLocalStorage();
   }
 
   updateLocalStorage(): void {
     localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.timers$.value));
+  }
+
+  editTimer(id: string, duration: number): void {
+    this.timers$.next(
+      [...this.timers$.value].map((timer) => {
+        if (timer.id !== id) {
+          return timer;
+        }
+
+        timer.startDate = new Date();
+        timer.endDate = new Date(Date.now() + duration);
+
+        return timer;
+      })
+    );
+    this.updateLocalStorage();
   }
 
   toggleTimerState(id: string) {
@@ -66,18 +85,18 @@ export class TimerService {
           return timer;
         }
 
+        timer.stopped = !timer.stopped;
         if (timer.stopped === false) {
-          timer.stopDate = new Date();
-          timer.stopped = true;
-        } else {
-          timer.stopped = true;
           const remainingTime = timer.endDate.getTime() - timer.stopDate.getTime();
           timer.endDate = new Date(Date.now() + remainingTime);
+        } else {
+          timer.stopDate = new Date();
         }
 
         return timer;
       })
     );
+    this.updateLocalStorage();
   }
 
   private parseTimerFromJson(json: TimerJson): Timer {

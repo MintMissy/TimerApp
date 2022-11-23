@@ -1,2 +1,6 @@
-<app-timer-card *ngFor="let timer of timers" [timer]="timer"> </app-timer-card>
+<app-timer-card *ngFor="let timer of timers" [timer]="timer" 
+(timerDeleteClick)="timerDeleteClick.emit($event)"
+(timerEditClick)="timerEditClick.emit($event)"
+(timerToggleStopClick)="timerToggleStopClick.emit($event)"
+></app-timer-card>
 <ng-content></ng-content>

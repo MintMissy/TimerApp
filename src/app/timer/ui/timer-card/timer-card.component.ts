@@ -18,6 +18,6 @@ export class TimerCardComponent implements OnInit {
   ngOnInit(): void {}
 
   getRemainingTimeMillis() {
-    return (this.timer.endDate.getTime() - this.timer.stopDate.getTime()) / 1000;
+    return this.timer.endDate.getTime() - this.timer.startDate.getTime();
   }
 }

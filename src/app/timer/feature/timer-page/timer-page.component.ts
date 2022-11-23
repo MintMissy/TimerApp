@@ -18,12 +18,16 @@ export class TimerPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._timerService.loadTimers();
-    this._timerService.getTimers();
+    this.timers$ = this._timerService.getTimers();
   }
 
-  onToggleStopTimerButtonClick(id: string) {}
+  onToggleStopTimerButtonClick(id: string) {
+    this._timerService.toggleTimerState(id);
+  }
 
-  onRemoveTimerButtonClick(id: string) {}
+  onRemoveTimerButtonClick(id: string) {
+    this._timerService.removeTimer(id);
+  }
 
   onEditTimerButtonClick(id: string) {
     const timer = this._timerService.getTimer(id);
@@ -31,18 +35,34 @@ export class TimerPageComponent implements OnInit {
       return;
     }
 
-    // const timerFormDialog = this._matDialog.open(TimerFormDialogComponent, {
-    //   data: timer,
-    // });
+    const timerFormDialog = this._matDialog.open(TimerFormDialogComponent, {
+      data: timer,
+    });
 
-    // timerFormDialog.afterClosed().subscribe((result) => {
-    //   console.log(result);
-    // });
+    if (!timer.stopped) {
+      this._timerService.toggleTimerState(id);
+    }
+
+    timerFormDialog.afterClosed().subscribe((result) => {
+      if (result === null || result === undefined || result <= 0) {
+        return;
+      }
+      console.log(result);
+
+      this._timerService.editTimer(id, result);
+    });
   }
 
   onAddTimerButtonClick() {
-    const timerForm = this._matDialog.open(TimerFormDialogComponent, {
+    const timerFormDialog = this._matDialog.open(TimerFormDialogComponent, {
       data: null,
+    });
+    
+    timerFormDialog.afterClosed().subscribe((result) => {
+      if (result === null || result === undefined || result <= 0) {
+        return;
+      }
+      this._timerService.createTimer(result);
     });
   }
 }

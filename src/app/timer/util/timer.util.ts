@@ -5,11 +5,11 @@ function getTimerSeconds(timer: Timer): number {
 }
 
 export function getRemainingSecondsFromTimer(timer: Timer): number {
-  return getTimerSeconds(timer) % 60;
+  return Math.floor(getTimerSeconds(timer) % 60);
 }
 
 export function getRemainingMinutesFromTimer(timer: Timer): number {
-  return (getTimerSeconds(timer) / 60) % 60;
+  return Math.floor(getTimerSeconds(timer) / 60) % 60;
 }
 
 export function getRemainingHoursFromTimer(timer: Timer): number {
