@@ -1,3 +1,4 @@
+import { AddTimerCardComponent } from './timer/ui/add-timer-card/add-timer-card.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +20,7 @@ import { TimerPageComponent } from './timer/feature/timer-page/timer-page.compon
     TimerPageComponent,
     TimeFormatPipe,
     TimerFormDialogComponent,
+    AddTimerCardComponent,
   ],
   imports: [
     BrowserModule,

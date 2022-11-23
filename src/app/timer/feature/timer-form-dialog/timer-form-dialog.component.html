@@ -7,9 +7,15 @@
     <input placeholder="Seconds" type="number" formControlName="hourDuration" />
   </div>
   <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="getNewTimerDuration()" cdkFocusInitial type="button">
+    <button
+      mat-button
+      [mat-dialog-close]="getNewTimerDuration()"
+      cdkFocusInitial
+      type="button"
+      class="button"
+    >
       Save Changes
     </button>
-    <button mat-button (click)="onDiscardClick()" type="button">Discard</button>
+    <button mat-button (click)="onDiscardClick()" type="button" class="button">Discard</button>
   </div>
 </form>
