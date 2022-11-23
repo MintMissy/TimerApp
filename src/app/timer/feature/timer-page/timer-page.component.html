@@ -1,6 +1,5 @@
 <div class="content">
   <h1>Timers</h1>
-  <button (click)="onAddTimerButtonClick()" class="button">Add Timer</button>
 </div>
 <app-timer-list
   [timers]="(timers$ | async)!"
@@ -8,5 +7,5 @@
   (timerEditClick)="onEditTimerButtonClick($event)"
   (timerToggleStopClick)="onToggleStopTimerButtonClick($event)"
 >
-  <app-add-timer-card></app-add-timer-card>
+  <app-add-timer-card (cardClick)="onAddTimerButtonClick()"></app-add-timer-card>
 </app-timer-list>
