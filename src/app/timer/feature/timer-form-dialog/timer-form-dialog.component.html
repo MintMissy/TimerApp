@@ -1,12 +1,20 @@
 <form [formGroup]="timerForm">
   <h1 mat-dialog-title>Enter Timer Duration</h1>
-  <div mat-dialog-content>
-    <p>What's your favorite animal?</p>
-    <input placeholder="Hours" type="number" formControlName="secondsDuration" />
-    <input placeholder="Minutes" type="number" formControlName="minutesDuration" />
-    <input placeholder="Seconds" type="number" formControlName="hourDuration" />
+  <div mat-dialog-content class="input-group">
+    <div class="group">
+      <label for="">Hours</label>
+      <input placeholder="00" type="number" formControlName="hourDuration" />
+    </div>
+    <div class="group">
+      <label for="">Minutes</label>
+      <input placeholder="00" type="number" formControlName="minutesDuration" />
+    </div>
+    <div class="group">
+      <label for="">Seconds</label>
+      <input placeholder="00" type="number" formControlName="secondsDuration" />
+    </div>
   </div>
-  <div mat-dialog-actions>
+  <div mat-dialog-actions class="actions">
     <button
       mat-button
       [mat-dialog-close]="getNewTimerDuration()"
@@ -16,6 +24,8 @@
     >
       Save Changes
     </button>
-    <button mat-button (click)="onDiscardClick()" type="button" class="button">Discard</button>
+    <button mat-button (click)="onDiscardClick()" type="button" class="button button--discard">
+      Discard
+    </button>
   </div>
 </form>
