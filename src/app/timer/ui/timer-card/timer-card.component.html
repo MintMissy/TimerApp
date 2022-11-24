@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <p>{{ getRemainingTimeMillis() | timeFormat }}</p>
+    <p>{{ leftTime | timeFormat }}</p>
   </div>
   <div class="card-actions">
     <button (click)="timerEditClick.emit(timer.id)" class="button">

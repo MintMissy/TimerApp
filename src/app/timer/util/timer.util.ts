@@ -1,7 +1,7 @@
 import { Timer } from '../model/timer.model';
 
 function getTimerSeconds(timer: Timer): number {
-  return (timer.endDate.getTime() - timer.startDate.getTime()) / 1000;
+  return (timer.endDate.getTime() - timer.stopDate.getTime()) / 1000;
 }
 
 export function getRemainingSecondsFromTimer(timer: Timer): number {
